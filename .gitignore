@@ -5,3 +5,4 @@ __pycache__/
 reports/
 screenshots/
 .pytest_cache/
+.idea/
