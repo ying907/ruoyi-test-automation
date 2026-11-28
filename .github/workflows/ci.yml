@@ -9,6 +9,11 @@ jobs:
   static:
     name: 静态检查与用例收集
     runs-on: ubuntu-latest
+    # settings.py 快速失败要求 REDIS_CLI/LOGIN_PASS 非空；
+    # 静态检查只验证导入与用例收集，不会真连 Redis，给占位值即可
+    env:
+      REDIS_CLI: /usr/bin/redis-cli
+      LOGIN_PASS: dummy-for-static-check
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
