@@ -1,5 +1,7 @@
 # ruoyi-test-automation
 
+![CI](https://github.com/ying907/ruoyi-test-automation/actions/workflows/ci.yml/badge.svg)
+
 基于 RuoYi-Vue 后台管理系统的自动化测试项目，覆盖 UI 走查与接口测试，配套测试用例库（Excel）与可交付的 HTML 测试报告。
 
 被测系统：[RuoYi-Vue](https://github.com/yangzongzhuan/RuoYi-Vue)（Spring Boot + Vue 后台权限管理系统）

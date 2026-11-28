@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  static:
+    name: 静态检查与用例收集
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 安装依赖（requirements.txt 版本锁定生效）
+        run: pip install -r requirements.txt
+
+      - name: 模块导入检查
+        run: python -c "from utils.api_client import ApiClient; from utils.redis_helper import get_captcha, delete_pwd_counter; from utils.evidence import Evidence; print('imports OK')"
+
+      - name: 用例收集检查（验证所有测试文件语法正确、可被 pytest 识别）
+        run: pytest --collect-only -q

@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(ROOT / ".env")
 
 BASE_URL = os.getenv("BASE_URL", "http://localhost").rstrip("/")
+API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8080").rstrip("/")
 REDIS_CLI = os.getenv("REDIS_CLI", "")
 LOGIN_USER = os.getenv("LOGIN_USER", "admin")
 LOGIN_PASS = os.getenv("LOGIN_PASS", "")
