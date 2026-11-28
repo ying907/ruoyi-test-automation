@@ -51,7 +51,7 @@ jobs:
           mysql -h 127.0.0.1 -uroot -proot ry-vue < /tmp/ruoyi/sql/ry_*.sql
           mysql -h 127.0.0.1 -uroot -proot ry-vue < /tmp/ruoyi/sql/quartz.sql
 
-      - name: 对齐数据源配置（不信任上游默认值，强制写入本环境值）
+      - name: 对齐数据源与日志配置（不信任上游默认值，强制写入本环境值）
         run: |
           CFG=/tmp/ruoyi/ruoyi-admin/src/main/resources/application-druid.yml
           sed -i -E 's#localhost:3306/[a-zA-Z0-9_-]+#localhost:3306/ry-vue#' $CFG
@@ -59,6 +59,9 @@ jobs:
           sed -i -E 's/^(druid:)/druid:/' $CFG
           sed -i -E '/master:/,/slave3:/ s/^(  ([[:space:]]*)password:).*/\1 root/' $CFG
           grep -E "url:|username:|password:" $CFG
+          LOGBACK=/tmp/ruoyi/ruoyi-admin/src/main/resources/logback.xml
+          sed -i 's#/home/ruoyi/logs#/tmp/ruoyi/logs#' $LOGBACK
+          grep "log.path" $LOGBACK
 
       - name: 打包后端
         run: mvn -B -f /tmp/ruoyi/pom.xml package -DskipTests -q
