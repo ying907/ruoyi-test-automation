@@ -33,11 +33,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 安装 Java 21（与本地运行环境一致）
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "21"
-          cache: maven
 
       - name: 克隆 RuoYi-Vue 源码
         run: git clone --depth 1 https://github.com/yangzongzhuan/RuoYi-Vue.git /tmp/ruoyi
